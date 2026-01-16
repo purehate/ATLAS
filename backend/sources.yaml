@@ -1,0 +1,213 @@
+# ATLAS Data Sources Configuration
+# Similar to BBOT's config style - list all sources with optional API keys
+# Set enabled: true/false to enable/disable sources
+# Add API keys where available for better rate limits and access
+
+sources:
+  # ============================================
+  # Government & Public Sources (No API Key Required)
+  # ============================================
+  
+  mitre_attack:
+    enabled: true
+    name: "MITRE ATT&CK"
+    type: "framework"
+    url: "https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json"
+    api_key: ""  # Not required - public data
+    description: "MITRE ATT&CK framework with threat actors, techniques, and relationships"
+    reliability_score: 10
+    rate_limit: null
+    notes: "Public JSON feed, no authentication required"
+  
+  cisa_kev:
+    enabled: true
+    name: "CISA Known Exploited Vulnerabilities"
+    type: "vulnerability"
+    url: "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
+    api_key: ""  # Not required - public data
+    description: "CISA's catalog of known exploited vulnerabilities"
+    reliability_score: 10
+    rate_limit: null
+    notes: "Public JSON feed, updated regularly"
+  
+  cisa_advisories:
+    enabled: true
+    name: "CISA Cybersecurity Advisories"
+    type: "advisory"
+    url: "https://www.cisa.gov/news-events/cybersecurity-advisories"
+    api_key: ""  # Not required - public data
+    description: "CISA cybersecurity advisories and alerts"
+    reliability_score: 9
+    rate_limit: null
+    notes: "HTML scraping, may need selector updates"
+  
+  cisa_ics:
+    enabled: true
+    name: "CISA ICS Advisories"
+    type: "advisory"
+    url: "https://www.cisa.gov/news-events/ics-advisories"
+    api_key: ""  # Not required - public data
+    description: "Industrial Control Systems security advisories"
+    reliability_score: 9
+    rate_limit: null
+    notes: "Focus on manufacturing, energy, critical infrastructure"
+  
+  fbi_flash_reports:
+    enabled: true
+    name: "FBI IC3 Flash Reports"
+    type: "report"
+    url: "https://www.ic3.gov/CSA"
+    api_key: ""  # Not required - public data
+    description: "FBI IC3 Cyber Security Alerts (PDF reports)"
+    reliability_score: 8
+    rate_limit: null
+    notes: "PDF parsing, date-based URL pattern"
+  
+  nist_nvd:
+    enabled: true
+    name: "NIST National Vulnerability Database"
+    type: "vulnerability"
+    url: "https://services.nvd.nist.gov/rest/json/cves/2.0"
+    api_key: ""  # Optional - improves rate limits (5 req/30s without key, 50 req/30s with key)
+    description: "NIST CVE database with CVSS scores"
+    reliability_score: 10
+    rate_limit: "5 requests per 30 seconds (without key), 50 requests per 30 seconds (with key)"
+    notes: "Get API key at https://nvd.nist.gov/developers/request-an-api-key"
+    api_key_url: "https://nvd.nist.gov/developers/request-an-api-key"
+  
+  # ============================================
+  # Commercial Threat Intelligence (Public Blogs/Reports)
+  # ============================================
+  
+  mandiant_reports:
+    enabled: true
+    name: "Mandiant Threat Intelligence"
+    type: "report"
+    url: "https://cloud.google.com/security/resources"
+    api_key: ""  # Not required - public reports
+    description: "Mandiant threat intelligence reports and research"
+    reliability_score: 9
+    rate_limit: null
+    notes: "Sitemap-based scraping, high-quality reports"
+  
+  microsoft_security:
+    enabled: true
+    name: "Microsoft Security Blog"
+    type: "blog"
+    url: "https://www.microsoft.com/en-us/security/blog/"
+    api_key: ""  # Not required - public blog
+    description: "Microsoft Security threat intelligence blog posts"
+    reliability_score: 8
+    rate_limit: null
+    notes: "HTML scraping, regular updates"
+  
+  crowdstrike_blog:
+    enabled: true
+    name: "CrowdStrike Blog"
+    type: "blog"
+    url: "https://www.crowdstrike.com/blog/"
+    api_key: ""  # Not required - public blog
+    description: "CrowdStrike threat intelligence and research"
+    reliability_score: 8
+    rate_limit: null
+    notes: "RSS feed parsing"
+  
+  unit42_reports:
+    enabled: true
+    name: "Unit 42 (Palo Alto Networks)"
+    type: "report"
+    url: "https://unit42.paloaltonetworks.com/"
+    api_key: ""  # Not required - public reports
+    description: "Unit 42 threat research and intelligence reports"
+    reliability_score: 8
+    rate_limit: null
+    notes: "HTML scraping, detailed threat reports"
+  
+  google_tag:
+    enabled: true
+    name: "Google Threat Analysis Group"
+    type: "blog"
+    url: "https://blog.google/threat-analysis-group/"
+    api_key: ""  # Not required - public blog
+    description: "Google TAG threat intelligence and research"
+    reliability_score: 8
+    rate_limit: null
+    notes: "HTML scraping, high-quality intelligence"
+  
+  # ============================================
+  # Open Source & Developer Sources
+  # ============================================
+  
+  github_security:
+    enabled: true
+    name: "GitHub Security Advisories"
+    type: "advisory"
+    url: "https://github.com/advisories"
+    api_key: ""  # Optional - improves rate limits (60 req/hour without key, 5000 req/hour with key)
+    description: "GitHub Security Advisory database"
+    reliability_score: 8
+    rate_limit: "60 requests per hour (without key), 5000 requests per hour (with key)"
+    notes: "Get API key at https://github.com/settings/tokens"
+    api_key_url: "https://github.com/settings/tokens"
+  
+  # ============================================
+  # Company Lookup Services
+  # ============================================
+  
+  opencorporates:
+    enabled: true
+    name: "OpenCorporates"
+    type: "lookup"
+    url: "https://api.opencorporates.com"
+    api_key: ""  # Required for production use - free tier available
+    description: "Company search and validation service"
+    reliability_score: 7
+    rate_limit: "Limited without key, higher limits with key"
+    notes: "Get API key at https://opencorporates.com/api_accounts/new"
+    api_key_url: "https://opencorporates.com/api_accounts/new"
+  
+  # ============================================
+  # Future Sources (Disabled by Default)
+  # ============================================
+  
+  # record_future:
+  #   enabled: false
+  #   name: "Recorded Future"
+  #   type: "intelligence"
+  #   url: "https://api.recordedfuture.com"
+  #   api_key: ""  # Required - commercial service
+  #   description: "Recorded Future threat intelligence platform"
+  #   reliability_score: 9
+  #   rate_limit: "Varies by subscription"
+  #   notes: "Commercial service, requires subscription"
+  
+  # threat_intel_feeds:
+  #   enabled: false
+  #   name: "Custom Threat Intel Feeds"
+  #   type: "feed"
+  #   url: ""
+  #   api_key: ""
+  #   description: "Add custom RSS/JSON feeds"
+  #   reliability_score: 6
+  #   rate_limit: null
+  #   notes: "Configure custom feeds here"
+
+# ============================================
+# Global Settings
+# ============================================
+
+settings:
+  # Ingestion schedule (hour of day, 0-23)
+  ingestion_hour: 2
+  
+  # Score recalculation schedule
+  score_recalc_hour: 3
+  
+  # Default limits per source
+  default_limit: 50
+  
+  # Historical backfill settings
+  backfill_years: 2
+  
+  # Rate limiting
+  global_rate_limit_per_hour: 1000

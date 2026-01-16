@@ -1,0 +1,30 @@
+# ATLAS Data Sources Configuration - Example File
+# Copy this to sources.yaml and configure your API keys
+# cp sources.yaml.example sources.yaml
+
+sources:
+  # Example: NIST NVD with API key
+  nist_nvd:
+    enabled: true
+    name: "NIST National Vulnerability Database"
+    type: "vulnerability"
+    url: "https://services.nvd.nist.gov/rest/json/cves/2.0"
+    api_key: "your-nist-api-key-here"  # Get at https://nvd.nist.gov/developers/request-an-api-key
+    description: "NIST CVE database with CVSS scores"
+    reliability_score: 10
+    rate_limit: "5 requests per 30 seconds (without key), 50 requests per 30 seconds (with key)"
+    notes: "Get API key at https://nvd.nist.gov/developers/request-an-api-key"
+    api_key_url: "https://nvd.nist.gov/developers/request-an-api-key"
+  
+  # Example: OpenCorporates with API key
+  opencorporates:
+    enabled: true
+    name: "OpenCorporates"
+    type: "lookup"
+    url: "https://api.opencorporates.com"
+    api_key: "your-opencorporates-api-key-here"  # Get at https://opencorporates.com/api_accounts/new
+    description: "Company search and validation service"
+    reliability_score: 7
+    rate_limit: "Limited without key, higher limits with key"
+    notes: "Get API key at https://opencorporates.com/api_accounts/new"
+    api_key_url: "https://opencorporates.com/api_accounts/new"

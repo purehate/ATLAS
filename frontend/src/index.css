@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    margin: 0;
+    font-family: 'Courier New', Monaco, Menlo, monospace;
+    background: #1d2021;
+    color: #ebdbb2;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Subtle scan line effect */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(184, 187, 38, 0.1),
+      transparent
+    );
+    pointer-events: none;
+    z-index: 9999;
+    animation: scan-line 3s linear infinite;
+  }
+
+  /* Terminal-style text selection */
+  ::selection {
+    background: rgba(184, 187, 38, 0.3);
+    color: #ebdbb2;
+  }
+}
+
+@layer components {
+  /* Retro terminal-style input */
+  .terminal-input {
+    @apply bg-gruvbox-dark border-2 border-gruvbox-green text-gruvbox-light;
+    @apply focus:border-gruvbox-green-bright focus:outline-none;
+    @apply focus:shadow-glow-green-sm transition-all duration-200;
+    @apply placeholder-gruvbox-gray;
+  }
+
+  /* Hacker-style button */
+  .hacker-button {
+    @apply bg-gruvbox-green border-2 border-gruvbox-green-bright text-gruvbox-darker;
+    @apply font-bold py-2 px-6 rounded;
+    @apply hover:bg-gruvbox-green-bright hover:shadow-glow-green;
+    @apply active:shadow-retro transition-all duration-200;
+    @apply font-hacker tracking-wide;
+  }
+
+  /* Terminal card */
+  .terminal-card {
+    @apply bg-gruvbox-dark border-2 border-gruvbox-green;
+    @apply shadow-retro;
+    @apply transition-all duration-300;
+  }
+
+  .terminal-card:hover {
+    @apply border-gruvbox-green-bright shadow-glow-green-sm;
+  }
+
+  /* Glow text effect */
+  .glow-text {
+    text-shadow: 0 0 10px rgba(184, 187, 38, 0.5),
+                 0 0 20px rgba(184, 187, 38, 0.3);
+  }
+}
