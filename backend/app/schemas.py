@@ -1,14 +1,21 @@
-from pydantic import BaseModel, Field
-from typing import Optional, List
+from __future__ import annotations
+
 from datetime import date
+from typing import List, Optional
 from uuid import UUID
+
+from pydantic import BaseModel, Field
 
 
 # Request Schemas
 class CalculateRequest(BaseModel):
     company_name: str = Field(..., description="Company name")
-    business_vertical: str = Field(..., description="Business vertical (e.g., Financial Services)")
-    sub_vertical: Optional[str] = Field(None, description="Sub-vertical (e.g., Banking)")
+    business_vertical: str = Field(
+        ..., description="Business vertical (e.g., Financial Services)"
+    )
+    sub_vertical: Optional[str] = Field(
+        None, description="Sub-vertical (e.g., Banking)"
+    )
 
 
 # Response Schemas
